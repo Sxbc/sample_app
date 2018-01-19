@@ -21,3 +21,23 @@
 /yarn-error.log
 
 .byebug_history
+
+!.keep
+*.byebug_history
+*.DS_Store
+*.swo
+*.swp
+*.sublime-workspace
+*.sublime-project
+/.bundle
+/.env*
+/.foreman
+/.ruby-version*
+/coverage/*
+/public/system
+/public/assets
+/tags
+*.un~
+.idea/
+.ruby-version*
+idp_metadata*
