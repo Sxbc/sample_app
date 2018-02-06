@@ -1,5 +1,7 @@
 class User < ApplicationRecord
 
+  has_many :microposts, dependent: :destroy
+
   attr_accessor :remember_token, :activation_token, :reset_token
 
   before_save :downcase_email 
@@ -10,7 +12,6 @@ class User < ApplicationRecord
   validates :email, presence: true, length: {maximum: 255},
     format: {with: VALID_EMAIL_REGEX},
     uniqueness: {case_sensitive: false}
-
   has_secure_password
   validates :password, presence: true, length: {minimum:6}, allow_blank: true
 
@@ -71,7 +72,12 @@ class User < ApplicationRecord
     reset_sent_at < 2.hours.ago
   end
 
-
+  #Defines a proto-feed.
+  #See "Following user" for the full implementation.
+  def feed
+    Micropost.where("user_id=?", id)
+  end
+  
   #From down here everything is hidden.
   private
 
